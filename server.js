@@ -3,14 +3,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(cors())
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-})
-
-app.get('/js/main.js', (req, res) => {
-    res.sendFile(__dirname + '/js/main.js')
-})
+app.use(express.static('public'))
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () =>
