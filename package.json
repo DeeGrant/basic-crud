@@ -1,0 +1,24 @@
+{
+  "name": "basic-crud",
+  "version": "1.0.0",
+  "description": "A live basic CRUD app. Check it out: [https://one-basic-crud.herokuapp.com/](https://one-basic-crud.herokuapp.com/)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeeGrant/basic-crud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeeGrant/basic-crud/issues"
+  },
+  "homepage": "https://github.com/DeeGrant/basic-crud#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2"
+  }
+}
