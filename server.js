@@ -21,6 +21,10 @@ MongoClient.connect(dbConnectionStr)
         console.log(`Connected to ${dbName} database.`)
     })
 
+app.get('/', (req, res) => {
+    res.render('index.ejs')
+})
+
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () =>
 {
