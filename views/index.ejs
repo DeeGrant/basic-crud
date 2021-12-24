@@ -8,6 +8,16 @@
 </head>
 <body>
     <h1>Basic Crud</h1>
+    <h3>Add Todo</h3>
+    <form action="/api/add-todo" method="post">
+        <input type="text" placeholder="todo" name="what">
+        <input type="number" placeholder="priority" name="priority">
+        <input type="submit">
+    </form>
+    <h2>ToDos</h2>
+    <ul class="todos">
+
+    </ul>
     <script src="js/main.js"></script>
 </body>
 </html>
