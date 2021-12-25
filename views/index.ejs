@@ -16,7 +16,12 @@
     </form>
     <h2>ToDos</h2>
     <ul class="todos">
-
+    <% for (i=0; i < todos.length; i++) { %>
+        <li>
+            <span><%= todos[i].what%></span>
+            <span><%= todos[i].priority%></span>
+        </li>
+    <% } %>
     </ul>
     <script src="js/main.js"></script>
 </body>

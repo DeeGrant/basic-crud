@@ -23,7 +23,10 @@ MongoClient.connect(dbConnectionStr, {useUnifiedTopology: true})
     })
 
 app.get('/', (req, res) => {
-    res.render('index.ejs')
+    db.collection(TODOS).find().sort({priority: -1}).toArray()
+    .then(data => {
+        res.render('index.ejs', {todos: data})
+    })
 })
 
 app.post('/api/add-todo', (req, res) => {
