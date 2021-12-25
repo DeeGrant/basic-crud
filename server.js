@@ -1,8 +1,9 @@
 const cors = require('cors')
 require('dotenv').config()
 const express = require('express')
-const MongoClient = require('mongodb').MongoClient
+const mongo = require('mongodb')
 
+const MongoClient = mongo.MongoClient
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -37,6 +38,19 @@ app.post('/api/add-todo', (req, res) => {
     .then(result => {
         console.log('Todo added')
         res.redirect('/')
+    })
+    .catch(e => {console.error(e)})
+})
+
+app.delete('/api/delete-todo/:id', (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    db.collection(TODOS).deleteOne({
+        _id: mongo.ObjectId(id)
+    })
+    .then(result => {
+        console.log('Todo deleted')
+        res.json('Todo deleted')
     })
     .catch(e => {console.error(e)})
 })
