@@ -7,3 +7,7 @@ Add .env file in root containing:
 
     DB_STRING = <database connection string>
     DB_NAME = <database name>
+
+#### Improvements
+
+- Change priority to int

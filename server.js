@@ -33,24 +33,44 @@ app.get('/', (req, res) => {
 app.post('/api/add-todo', (req, res) => {
     db.collection(TODOS).insertOne({
         what: req.body.what,
-        priority: req.body.priority
+        priority: Number(req.body.priority)
     })
     .then(result => {
-        console.log('Todo added')
         res.redirect('/')
     })
     .catch(e => {console.error(e)})
 })
 
-app.delete('/api/delete-todo/:id', (req, res) => {
-    const id = req.params.id
-    console.log(id)
+app.delete('/api/delete-todo', (req, res) => {
+    const id = req.body.id
     db.collection(TODOS).deleteOne({
         _id: mongo.ObjectId(id)
     })
     .then(result => {
-        console.log('Todo deleted')
         res.json('Todo deleted')
+    })
+    .catch(e => {console.error(e)})
+})
+
+app.put('/api/change-priority', (req, res) => {
+    const id = req.body.id
+    const priority = Number(req.body.priority)
+    const delta = Number(req.body.delta)
+    db.collection(TODOS).updateOne({
+        _id: mongo.ObjectId(id)
+    },
+    {
+        $set: {
+            priority: priority + delta
+        }
+    },
+    {
+        sort: {_id: -1},
+        upsert: true
+    })
+    .then(result => {
+        console.log('Priority updated')
+        res.json('Priority updated')
     })
     .catch(e => {console.error(e)})
 })
