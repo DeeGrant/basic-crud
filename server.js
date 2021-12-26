@@ -23,48 +23,49 @@ MongoClient.connect(dbConnectionStr, {useUnifiedTopology: true})
         console.log(`Connected to ${dbName} database.`)
     })
 
-app.get('/', (req, res) => {
-    db.collection(TODOS).find().sort({priority: 1}).toArray()
-    .then(data => {
-        res.render('index.ejs', {todos: data})
-    })
+app.get('/', async (req, res) => {
+    const todos = await db.collection(TODOS).find().sort({priority: 1}).toArray()
+    res.render('index.ejs', {todos: todos})
 })
 
-app.post('/api/add-todo', (req, res) => {
-    db.collection(TODOS).insertOne({
-        what: req.body.what,
-        priority: Number(req.body.priority)
-    })
-    .then(result => {
+app.post('/api/add-todo', async (req, res) => {
+    try {
+        const result = await db.collection(TODOS).insertOne({
+            what: req.body.what,
+            priority: Number(req.body.priority)
+        })
         res.redirect('/')
-    })
-    .catch(e => {console.error(e)})
+    } catch (e) {
+        console.error(e)
+    }
 })
 
-app.delete('/api/delete-todo', (req, res) => {
-    const id = req.body.id
-    db.collection(TODOS).deleteOne({
-        _id: mongo.ObjectId(id)
-    })
-    .then(result => {
+app.delete('/api/delete-todo', async (req, res) => {
+    try {
+        const id = req.body.id
+        const result = await db.collection(TODOS).deleteOne({
+            _id: mongo.ObjectId(id)
+        })
         res.json('Todo deleted')
-    })
-    .catch(e => {console.error(e)})
+    } catch (e) {
+        console.error(e)
+    }
 })
 
-app.put('/api/change-priority', (req, res) => {
-    db.collection(TODOS).updateOne({
-        _id: mongo.ObjectId(req.body.id)
-    },
-    {
-        $set: {
-            priority: Number(req.body.priority) + Number(req.body.delta)
-        }
-    })
-    .then(result => {
+app.put('/api/change-priority', async (req, res) => {
+    try {
+        const result = await db.collection(TODOS).updateOne({
+            _id: mongo.ObjectId(req.body.id)
+        },
+        {
+            $set: {
+                priority: Number(req.body.priority) + Number(req.body.delta)
+            }
+        })
         res.json('Priority updated')
-    })
-    .catch(e => {console.error(e)})
+    } catch (e) {
+        console.error(e)
+    }
 })
 
 const PORT = process.env.PORT || 8000
