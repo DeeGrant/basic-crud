@@ -10,4 +10,4 @@ Add .env file in root containing:
 
 #### Improvements
 
-- Change priority to int
+- Add styling

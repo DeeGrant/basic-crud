@@ -10,22 +10,20 @@ Array.from(up).forEach(e => {
     e.addEventListener('click', raisePriority)
 })
 
-// Array.from(down).forEach(e => {
-//     e.addEventListener('click', lowerPriority)
-// })
+Array.from(down).forEach(e => {
+    e.addEventListener('click', lowerPriority)
+})
 
 async function deleteTodo() {
     const id = this.parentNode.dataset.id
     try {
-        const response = await fetch('http://localhost:8000/api/delete-todo', {
+        await fetch('https://one-basic-crud.herokuapp.com/api/delete-todo', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 id: id
             }),
         })
-        const data = await response.json()
-        console.log(data)
         location.reload()
     } catch (e) {
         console.log(e)
@@ -33,23 +31,35 @@ async function deleteTodo() {
 }
 
 async function raisePriority() {
-    const id = this.parentNode.dataset.id
-    const priority = Number(this.parentNode.childNodes[3].innerText)
     try {
-        const response = await fetch('http://localhost:8000/api/change-priority', {
+        await fetch('https://one-basic-crud.herokuapp.com/api/change-priority', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                id: id,
-                priority: priority,
+                id: this.parentNode.dataset.id,
+                priority: Number(this.parentNode.childNodes[3].innerText),
                 delta: 1
             })
         })
-        const data = response.json()
-        console.log(data)
         location.reload()
     } catch (e) {
         console.log(e)
     }
-    console.log(id)
+}
+
+async function lowerPriority() {
+    try {
+        await fetch('https://one-basic-crud.herokuapp.com/api/change-priority', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id: this.parentNode.dataset.id,
+                priority: Number(this.parentNode.childNodes[3].innerText),
+                delta: -1
+            })
+        })
+        location.reload()
+    } catch (e) {
+        console.log(e)
+    }
 }

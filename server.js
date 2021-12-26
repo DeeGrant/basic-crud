@@ -53,15 +53,12 @@ app.delete('/api/delete-todo', (req, res) => {
 })
 
 app.put('/api/change-priority', (req, res) => {
-    const id = req.body.id
-    const priority = Number(req.body.priority)
-    const delta = Number(req.body.delta)
     db.collection(TODOS).updateOne({
-        _id: mongo.ObjectId(id)
+        _id: mongo.ObjectId(req.body.id)
     },
     {
         $set: {
-            priority: priority + delta
+            priority: Number(req.body.priority) + Number(req.body.delta)
         }
     },
     {
@@ -69,7 +66,6 @@ app.put('/api/change-priority', (req, res) => {
         upsert: true
     })
     .then(result => {
-        console.log('Priority updated')
         res.json('Priority updated')
     })
     .catch(e => {console.error(e)})
