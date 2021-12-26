@@ -24,7 +24,7 @@ MongoClient.connect(dbConnectionStr, {useUnifiedTopology: true})
     })
 
 app.get('/', (req, res) => {
-    db.collection(TODOS).find().sort({priority: -1}).toArray()
+    db.collection(TODOS).find().sort({priority: 1}).toArray()
     .then(data => {
         res.render('index.ejs', {todos: data})
     })
@@ -60,10 +60,6 @@ app.put('/api/change-priority', (req, res) => {
         $set: {
             priority: Number(req.body.priority) + Number(req.body.delta)
         }
-    },
-    {
-        sort: {_id: -1},
-        upsert: true
     })
     .then(result => {
         res.json('Priority updated')

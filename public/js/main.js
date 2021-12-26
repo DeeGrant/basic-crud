@@ -38,7 +38,7 @@ async function raisePriority() {
             body: JSON.stringify({
                 id: this.parentNode.dataset.id,
                 priority: Number(this.parentNode.childNodes[3].innerText),
-                delta: 1
+                delta: -1
             })
         })
         location.reload()
@@ -55,7 +55,7 @@ async function lowerPriority() {
             body: JSON.stringify({
                 id: this.parentNode.dataset.id,
                 priority: Number(this.parentNode.childNodes[3].innerText),
-                delta: -1
+                delta: 1
             })
         })
         location.reload()
