@@ -13,3 +13,5 @@ Add .env file in root containing:
 #### Improvements
 
 - Add styling
+- reorder priority buttons
+- update increment api

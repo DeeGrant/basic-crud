@@ -32,7 +32,8 @@ app.post('/api/add-todo', async (req, res) => {
     try {
         const result = await db.collection(TODOS).insertOne({
             what: req.body.what,
-            priority: Number(req.body.priority)
+            priority: Number(req.body.priority),
+            complete: false
         })
         res.redirect('/')
     } catch (e) {
@@ -63,6 +64,38 @@ app.put('/api/change-priority', async (req, res) => {
             }
         })
         res.json('Priority updated')
+    } catch (e) {
+        console.error(e)
+    }
+})
+
+app.put('/api/complete', async (req, res) => {
+    try {
+        await db.collection(TODOS).updateOne({
+            _id: mongo.ObjectId(req.body.id)
+        },
+        {
+            $set: {
+                complete: true
+            }
+        })
+        res.json('Complete Todo')
+    } catch (e) {
+        console.error(e)
+    }
+})
+
+app.put('/api/redo', async (req, res) => {
+    try {
+        await db.collection(TODOS).updateOne({
+            _id: mongo.ObjectId(req.body.id)
+        },
+        {
+            $set: {
+                complete: false
+            }
+        })
+        res.json('Redo Todo')
     } catch (e) {
         console.error(e)
     }

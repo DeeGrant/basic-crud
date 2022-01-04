@@ -1,0 +1,8 @@
+html {
+    color: darkslategrey;
+}
+
+.complete {
+    text-decoration: line-through;
+    color: lightgray;
+}

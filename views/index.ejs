@@ -6,23 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Basic Crud</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Basic Crud</h1>
+    <h1>Basic CRUD</h1>
     <h3>Add Todo</h3>
     <form action="/api/add-todo" method="post">
         <input type="text" placeholder="todo" name="what">
         <input type="number" placeholder="priority" name="priority">
-        <input type="submit">
+        <input type="submit" value="Create">
     </form>
     <h2>ToDos</h2>
     <ul class="todos">
     <% for (i=0; i < todos.length; i++) { %>
         <li data-id="<%= todos[i]._id %>">
-            <span><%= todos[i].what %></span>
-            <span><%= todos[i].priority %></span>
             <i class="fas fa-arrow-circle-up"></i>
             <i class="fas fa-arrow-circle-down"></i>
+            <% if (todos[i].complete === true) { %>
+                <span class="todoItem complete"><%= todos[i].priority %> - <%= todos[i].what %></span>
+            <% } else { %>
+                <span class="todoItem"><%= todos[i].priority %> - <%= todos[i].what %></span>
+            <% } %>
             <i class="fas fa-trash"></i>
         </li>
     <% } %>
