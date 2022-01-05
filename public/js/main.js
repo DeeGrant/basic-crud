@@ -4,29 +4,19 @@ down = document.querySelectorAll('.fa-arrow-circle-down')
 todos = document.querySelectorAll('.todoItem')
 finished = document.querySelectorAll('.complete')
 
-// TODO addClickEvent()
-Array.from(trash).forEach(e => {
-    e.addEventListener('click', deleteTodo)
-})
+function addClickEvent(elements, callback) {
+    Array.from(elements).forEach(e => {
+        e.addEventListener('click', callback)
+    })
+}
 
-Array.from(up).forEach(e => {
-    e.addEventListener('click', raisePriority)
-})
+addClickEvent(trash, deleteTodo)
+addClickEvent(up, raisePriority)
+addClickEvent(down, lowerPriority)
+addClickEvent(todos, complete)
+addClickEvent(finished, redo)
 
-Array.from(down).forEach(e => {
-    e.addEventListener('click', lowerPriority)
-})
-
-Array.from(todos).forEach(e => {
-    e.addEventListener('click', complete)
-})
-
-Array.from(finished).forEach(e => {
-    e.addEventListener('click', redo)
-})
-
-// endpoint = 'https://one-basic-crud.herokuapp.com'
-const ENDPOINT = 'http://localhost:8000'
+const ENDPOINT = 'https://one-basic-crud.herokuapp.com'
 
 async function deleteTodo() {
     const id = this.parentNode.dataset.id
