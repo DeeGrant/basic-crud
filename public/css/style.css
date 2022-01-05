@@ -6,3 +6,11 @@ html {
     text-decoration: line-through;
     color: lightgray;
 }
+
+.todoItem, .fas {
+    cursor: default;
+}
+
+.fas:hover, .todoItem:hover {
+    opacity: .75;
+}
