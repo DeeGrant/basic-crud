@@ -71,7 +71,7 @@ app.put('/api/change-priority', async (req, res) => {
 
 app.put('/api/complete', async (req, res) => {
     try {
-        await db.collection(TODOS).updateOne({
+        const result = await db.collection(TODOS).updateOne({
             _id: mongo.ObjectId(req.body.id)
         },
         {
@@ -87,7 +87,7 @@ app.put('/api/complete', async (req, res) => {
 
 app.put('/api/redo', async (req, res) => {
     try {
-        await db.collection(TODOS).updateOne({
+        const result = await db.collection(TODOS).updateOne({
             _id: mongo.ObjectId(req.body.id)
         },
         {
