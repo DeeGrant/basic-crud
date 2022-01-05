@@ -51,7 +51,7 @@ async function raisePriority() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 id: this.parentNode.dataset.id,
-                priority: Number(this.parentNode.childNodes[3].innerText),
+                priority: Number(this.parentNode.childNodes[5].innerText),
                 delta: -1
             })
         })
@@ -68,7 +68,7 @@ async function lowerPriority() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 id: this.parentNode.dataset.id,
-                priority: Number(this.parentNode.childNodes[3].innerText),
+                priority: Number(this.parentNode.childNodes[5].innerText),
                 delta: 1
             })
         })

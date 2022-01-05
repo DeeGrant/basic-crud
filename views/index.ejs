@@ -22,10 +22,11 @@
         <li data-id="<%= todos[i]._id %>">
             <i class="fas fa-arrow-circle-up"></i>
             <i class="fas fa-arrow-circle-down"></i>
+            <span><%= todos[i].priority %></span>
             <% if (todos[i].complete === true) { %>
-                <span class="todoItem complete"><%= todos[i].priority %> - <%= todos[i].what %></span>
+                <span class="todoItem complete"> - <%= todos[i].what %></span>
             <% } else { %>
-                <span class="todoItem"><%= todos[i].priority %> - <%= todos[i].what %></span>
+                <span class="todoItem"> - <%= todos[i].what %></span>
             <% } %>
             <i class="fas fa-trash"></i>
         </li>
